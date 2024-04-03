@@ -13,14 +13,20 @@ class GoldenDrawer extends StatelessWidget {
               child: Container(
                 color: Colors.red,
                 child: null,
-              )), ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Asosiy'),
-            onTap: () {},
-          ),
+              )),
           ListTile(
-            leading: const Icon(Icons.account_circle),
+            leading: SizedBox(
+                height: 50,
+                width: 50,
+                child: Image.asset("assets/icons/profile.png",fit: BoxFit.cover,)),
             title: const Text('Profile'),
+            onTap: () {},
+          ),ListTile(
+            leading: SizedBox(
+                height: 50,
+                width: 50,
+                child: Image.asset("assets/icons/main.png",fit: BoxFit.cover,)),
+            title: const Text('Asosiy'),
             onTap: () {},
           ),
         ],

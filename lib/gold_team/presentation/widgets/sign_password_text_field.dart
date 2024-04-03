@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:gold_team_investor_go/gold_team/presentation/widgets/password_text_field.dart";
 
-import "App_private_textfield.dart";
 
 class PasswordTextFieldWidget extends StatelessWidget {
   const PasswordTextFieldWidget(
@@ -27,7 +26,7 @@ class PasswordTextFieldWidget extends StatelessWidget {
         child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Colors.black26)),
+                side: const BorderSide(color: Colors.black26)),
             elevation: 3,
             color: Colors.lightBlue.shade50,
             shadowColor: Colors.black,

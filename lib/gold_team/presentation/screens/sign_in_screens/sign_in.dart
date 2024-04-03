@@ -19,6 +19,9 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignIn> with SingleTickerProviderStateMixin {
+
+  double _opacity = 0.0;
+
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -30,83 +33,99 @@ class _SignUpState extends State<SignIn> with SingleTickerProviderStateMixin {
   bool passIcon = true;
 
   @override
+  void initState() {
+    Future.delayed(Duration(milliseconds: 1), () {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: _signUp(),
     );
   }
 
   _signUp() {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(gradient: myGradient),
-      child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Gap(30),
-              Text("Sizni Yana Ko'rib Turganimizdan Xursandmiz!",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.nunitoSans(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              const Gap(10),
-              Text("Ilovani Ishga Tushurishdan Oldin Login Qiling",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.nunitoSans(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              const Gap(20),
-              SignTextFieldWidget(
-                  hint: "Username",
-                  controller: _username,
-                  leading: const Icon(Icons.person_rounded)),
-              PasswordTextFieldWidget(
-                  close: passIcon,
-                  hint: "Parol",
-                  leading: const Icon(Icons.lock),
-                  controller: _password,
-                  prefIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          passIcon = !passIcon;
-                        });
-                      },
-                      icon: Icon(passIcon
-                          ? CupertinoIcons.eye_fill
-                          : CupertinoIcons.eye_slash))),
-              const Gap(30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Hali Yangimisiz ?   ",
-                      style: GoogleFonts.nunitoSans(
-                          color: Colors.white, fontWeight: FontWeight.bold)),
-                  const OpenContainerToggling(text: "Register", to: SignUp())
-                ],
-              ),
-              const Gap(30),
-               SizedBox(
-                  height: 55,
-                  width: double.infinity,
-                  child: LogRegButton(text: "Login",onTap: ()=>navPush(context,const MainPage()))),
-              const Gap(15),
-              InkWell(
-                onTap: () =>_showPasswordDialog(context),
-                child: Text("Parol Esingizdan Chiqdimi ?",
+    return AnimatedOpacity(
+      duration: const Duration(seconds: 3),
+      opacity: _opacity,
+      curve: Curves.easeInOut,
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(gradient: myGradient),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Gap(30),
+                Text("Sizni Yana Ko'rib Turganimizdan Xursandmiz!",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.nunitoSans(
-                        color: Colors.indigoAccent,
-                        fontWeight: FontWeight.bold)),
-              )
-            ],
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+                const Gap(10),
+                Text("Ilovani Ishga Tushurishdan Oldin Login Qiling",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.nunitoSans(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+                const Gap(20),
+                SignTextFieldWidget(
+                    hint: "Username",
+                    controller: _username,
+                    leading: const Icon(Icons.person_rounded)),
+                PasswordTextFieldWidget(
+                    close: passIcon,
+                    hint: "Parol",
+                    leading: const Icon(Icons.lock),
+                    controller: _password,
+                    prefIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            passIcon = !passIcon;
+                          });
+                        },
+                        icon: Icon(passIcon
+                            ? CupertinoIcons.eye_fill
+                            : CupertinoIcons.eye_slash))),
+                const Gap(30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Hali Yangimisiz ?   ",
+                        style: GoogleFonts.nunitoSans(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
+                    const OpenContainerToggling(text: "Register", to: SignUp())
+                  ],
+                ),
+                const Gap(30),
+                 SizedBox(
+                    height: 55,
+                    width: double.infinity,
+                    child: LogRegButton(text: "Login",onTap: ()=>navPush(context,const MainPage()))),
+                const Gap(15),
+                InkWell(
+                  onTap: () =>_showPasswordDialog(context),
+                  child: Text("Parol Esingizdan Chiqdimi ?",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.nunitoSans(
+                          color: Colors.indigoAccent,
+                          fontWeight: FontWeight.bold)),
+                )
+              ],
+            ),
           ),
         ),
       ),

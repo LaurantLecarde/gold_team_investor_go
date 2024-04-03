@@ -23,7 +23,7 @@ class SignTextFieldWidget extends StatelessWidget {
         child: Card(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: BorderSide(color: Colors.black26)),
+                side: const BorderSide(color: Colors.black26)),
             elevation: 3,
             color: Colors.lightBlue.shade50,
             shadowColor: Colors.black,
