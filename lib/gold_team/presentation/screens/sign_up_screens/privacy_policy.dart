@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
-import 'package:gold_team_investor_go/gold_team/presentation/widgets/navigators.dart';
+import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PrivacyPolicy extends StatelessWidget {
