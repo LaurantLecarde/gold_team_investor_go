@@ -61,7 +61,7 @@ class PasswordTextFieldWidget extends StatelessWidget {
                   errorStyle: GoogleFonts.nunitoSans()),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "Iltimos Email Qismini To'ldiring";
+                  return "Iltimos $section Qismini To'ldiring";
                 }
                 return null;
               },

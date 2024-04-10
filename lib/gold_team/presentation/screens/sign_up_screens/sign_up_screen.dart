@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_in_screens/sign_in.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_up_screens/about_company.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_up_screens/privacy_policy.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
@@ -122,7 +123,7 @@ class _SignUpState extends State<SignUp> {
                             });
                           },
                           icon: Icon(passIcon
-                              ? CupertinoIcons.eye_fill
+                              ? CupertinoIcons.eye
                               : CupertinoIcons.eye_slash)), section: 'Parol',),
                   PasswordTextFieldWidget(
                     number: false,
@@ -137,7 +138,7 @@ class _SignUpState extends State<SignUp> {
                             });
                           },
                           icon: Icon(confPassIcon
-                              ? CupertinoIcons.eye_fill
+                              ? CupertinoIcons.eye
                               : CupertinoIcons.eye_slash)), section: 'Parolni Tasdiqlash',),
                   const Gap(30),
                   Row(
@@ -150,7 +151,15 @@ class _SignUpState extends State<SignUp> {
                       const OpenContainerToggling(text: "Login", to: SignIn())
                     ],
                   ),
-                  const Gap(30),
+                  const Gap(10),
+                  InkWell(
+                      onTap: () => navPush(context, AboutCompany()),
+                      child: Text(" Kompaniya Haqida ",
+                          style: GoogleFonts.nunitoSans(
+                              fontSize: 14,
+                              color: Colors.indigoAccent,
+                              fontWeight: FontWeight.bold))),
+                  const Gap(15),
                   SizedBox(
                     height: 55,
                     width: double.infinity,
