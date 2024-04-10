@@ -4,10 +4,13 @@ import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:gold_team_investor_go/gold_team/constants/sizes_app.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/leading_icon.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/sign_password_text_field.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/loading_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -28,24 +31,27 @@ class _PaymentScreenState extends State<PaymentScreen> {
   double _paymeOp = 1.0;
   double _clickOp = 0.0;
 
+  late String clickImage;
+  late String paymeImage;
+
+  @override
+  void initState() {
+    clickImage = "assets/images/click.png";
+    paymeImage = "assets/images/payme.png";
+    super.initState();
+  }
+
+  var maskFormatter = new MaskTextInputFormatter(
+      mask: '# ### ### ### ### ###',
+      type: MaskAutoCompletionType.lazy
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainTheme(context),
-      appBar: GradientAppBar(
-        title: Text('HISOBNI TO`LDIRISH',
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20)),
-        gradient: LinearGradient(
-          colors: [
-            Color(0xff1d2b62),
-            Color(0xff4f315f)
-          ], // Your custom gradient colors
-          begin: Alignment.centerLeft,
-          end: Alignment.bottomRight,
-        ),
+      appBar: AppBarApp(
+        title: 'HISOBNI TO`LDIRISH',
       ),
       body: _paymentSection(),
     );
@@ -72,15 +78,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _paymentBuilderPayMe("assets/images/payme.png"),
-              _paymentBuilderClick("assets/images/click.png"),
+              _paymentBuilderPayMe(paymeImage),
+              _paymentBuilderClick(clickImage),
             ],
           ),
           const Gap(20),
           SizedBox(
               height: 60,
               width: double.infinity,
-              child: LogRegButton(text: "Hisobimni To'ldirish", onTap: (){}))
+              child: LogRegButton(text: "Hisobimni To'ldirish", onTap: () {}))
         ],
       ),
     );
@@ -99,10 +105,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
         width: size(context).width / 3,
         child: Stack(children: [
           Center(
-            child: Container(
-              width: 300,
-              decoration: _paymeOp == 1.0 ? BoxDecoration() : _boxDecoration,
-              child: Image.asset(img, fit: BoxFit.cover),
+            child: FutureBuilder(
+              future: _delayedCheckImage(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container(
+                      width: 300,
+                      height: 75,
+                      padding: EdgeInsets.all(8),
+                      decoration: _boxDecoration,
+                      child: LoadingWidget()); // Placeholder for loading
+                } else {
+                  return Container(
+                    width: 300,
+                    height: 75,
+                    decoration:
+                        _paymeOp == 1.0 ? BoxDecoration() : _boxDecoration,
+                    child: Image.asset(img, fit: BoxFit.cover),
+                  );
+                }
+              },
             ),
           ),
           Center(
@@ -129,11 +151,26 @@ class _PaymentScreenState extends State<PaymentScreen> {
         width: size(context).width / 3,
         child: Stack(children: [
           Center(
-            child: Container(
-              width: 300,
-              height: 75,
-              decoration: _clickOp == 1.0 ? BoxDecoration() : _boxDecoration,
-              child: Image.asset(img, fit: BoxFit.cover),
+            child: FutureBuilder(
+              future: _delayedCheckImage(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container(
+                      width: 300,
+                      height: 75,
+                      padding: EdgeInsets.all(8),
+                      decoration: _boxDecoration,
+                      child: LoadingWidget()); // Placeholder for loading
+                } else {
+                  return Container(
+                    width: 300,
+                    height: 75,
+                    decoration:
+                        _clickOp == 1.0 ? BoxDecoration() : _boxDecoration,
+                    child: Image.asset(img, fit: BoxFit.cover),
+                  );
+                }
+              },
             ),
           ),
           Center(
@@ -145,6 +182,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
         ]),
       ),
     );
+  }
+
+  Future<void> _delayedCheckImage() async {
+    await Future.delayed(Duration(seconds: 1));
   }
 
   _imageContainer(String img) {
@@ -196,6 +237,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 height: 55,
                 width: 200,
                 child: TextField(
+                  inputFormatters: [maskFormatter],
                   style: GoogleFonts.nunitoSans(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -229,39 +271,3 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 }
 
-class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final double height = 110;
-  final Widget title;
-  final LinearGradient gradient;
-
-  GradientAppBar({required this.title, required this.gradient});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-      height: height,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [LeadingIcon(), const Gap(40), title]),
-      ),
-      decoration: BoxDecoration(
-        gradient: gradient,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(height);
-}

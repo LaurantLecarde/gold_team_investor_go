@@ -1,54 +1,132 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
 class MyApp extends StatelessWidget {
-  final List<List<String>> tableData = [
-    ['Name', 'Age', 'Role'],
-    ['John Doe', '30', 'Developer'],
-    ['Jane Smith', '25', 'Designer'],
-    ['Alex Johnson', '35', 'Manager'],
-  ];
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Table Example',
+      theme: ThemeData(useMaterial3: true),
+      title: 'Login Form',
       home: Scaffold(
+        backgroundColor: Color(0xffe6e9ef),
         appBar: AppBar(
-          title: Text('Flutter Table Example'),
+          title: Text('Login'),
         ),
-        body: Center(
-          child: Table(
-            border: TableBorder.all(),
-            children: [
-              _buildTableRow(tableData[0], isHeader: true),
-              _buildTableRow(tableData[1]),
-              _buildTableRow(tableData[2]),
-              _buildTableRow(tableData[3]),
-            ],
-          ),
-        ),
+        body: LoginForm(),
       ),
     );
   }
+}
 
-  TableRow _buildTableRow(List<String> rowData, {bool isHeader = false}) {
-    return TableRow(
-      children: rowData.map((cellData) {
-        return TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              cellData,
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
+class LoginForm extends StatefulWidget {
+  @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const Gap(50),
+            Card(
+              color: Colors.white,
+              surfaceTintColor: Colors.white,
+              elevation: 10,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.black26,width: 3)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.black)
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.red,width: 3)
+                    ),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.red,width: 1)
+                    ),
+                  hintText: 'Email',
+                  hintStyle: GoogleFonts.nunitoSans(),
+                  // errorText: "Xaato"
+                  errorStyle: GoogleFonts.nunitoSans()
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Iltimos Email Qismini To'ldiring";
+                  }
+                  return null;
+                },
               ),
             ),
-          ),
-        );
-      }).toList(),
+            Card(
+              color: Colors.white,
+              surfaceTintColor: Colors.white,
+              elevation: 10,
+              child: TextFormField(
+                decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.black26,width: 3)
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.black)
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.red,width: 3)
+                    ),
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: Colors.red,width: 1)
+                    ),
+                    hintText: 'Parol',
+                    hintStyle: GoogleFonts.nunitoSans(),
+                    // errorText: "Xaato"
+                    errorStyle: GoogleFonts.nunitoSans()
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Iltimos Parol Qismini To'ldiring";
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                  }
+                },
+                child: Text('Submit'),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -43,6 +43,9 @@ dependencies:
   another_flutter_splash_screen: ^1.2.0
   flutter_launcher_icons: ^0.13.1
   blurrycontainer: ^1.0.2
+  lottie: ^3.1.0
+  marquee: ^2.2.3
+  mask_text_input_formatter: ^2.9.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +80,7 @@ flutter:
      - assets/images/
      - assets/logo/
      - assets/icons/
+     - assets/lottie/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

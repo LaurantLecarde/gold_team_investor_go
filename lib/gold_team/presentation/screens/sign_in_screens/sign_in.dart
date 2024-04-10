@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -7,10 +6,12 @@ import 'package:gold_team_investor_go/gold_team/presentation/screens/main_page.d
 import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_up_screens/sign_up_screen.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
-import 'package:gold_team_investor_go/gold_team/presentation/widgets/open_container.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/sign_password_text_field.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/sign_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import '../../widgets/workers/open_container.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -20,15 +21,19 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignIn> with SingleTickerProviderStateMixin {
-
   double _opacity = 0.0;
 
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _email = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
 
   bool passIcon = true;
+
+  var maskFormatterSimple = MaskTextInputFormatter(
+      mask: ""
+  );
 
   @override
   void initState() {
@@ -58,71 +63,82 @@ class _SignUpState extends State<SignIn> with SingleTickerProviderStateMixin {
         width: double.infinity,
         decoration: BoxDecoration(gradient: myGradientC()),
         child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Gap(30),
-                Text("Sizni Yana Ko'rib Turganimizdan Xursandmiz!",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                const Gap(10),
-                Text("Ilovani Ishga Tushurishdan Oldin Login Qiling",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-                const Gap(20),
-                SignTextFieldWidget(
-                    hint: "Username",
-                    controller: _username,
-                    leading: const Icon(Icons.person_rounded)),
-                PasswordTextFieldWidget(
-                    close: passIcon,
-                    hint: "Parol",
-                    leading: const Icon(Icons.lock),
-                    controller: _password,
-                    prefIcon: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            passIcon = !passIcon;
-                          });
-                        },
-                        icon: Icon(passIcon
-                            ? CupertinoIcons.eye_fill
-                            : CupertinoIcons.eye_slash))),
-                const Gap(30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("Hali Yangimisiz ?   ",
-                        style: GoogleFonts.nunitoSans(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
-                    const OpenContainerToggling(text: "Register", to: SignUp())
-                  ],
-                ),
-                const Gap(30),
-                 SizedBox(
-                    height: 55,
-                    width: double.infinity,
-                    child: LogRegButton(text: "Login",onTap: ()=>navPush(context,const MainPage()))),
-                const Gap(15),
-                InkWell(
-                  onTap: () =>_showPasswordDialog(context),
-                  child: Text("Parol Esingizdan Chiqdimi ?",
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Gap(30),
+                  Text("Sizni Yana Ko'rib Turganimizdan Xursandmiz!",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.nunitoSans(
-                          color: Colors.indigoAccent,
-                          fontWeight: FontWeight.bold)),
-                )
-              ],
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                  const Gap(10),
+                  Text("Ilovani Ishga Tushurishdan Oldin Login Qiling",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                  const Gap(20),
+                  SignTextFieldWidget(
+                    number: false,
+                      hint: "Username",
+                      controller: _username,
+                      leading: const Icon(Icons.person_rounded), section: 'Username',),
+                  PasswordTextFieldWidget(
+                    number: false,
+                      close: passIcon,
+                      hint: "Parol",
+                      leading: const Icon(Icons.lock),
+                      controller: _password,
+                      prefIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              passIcon = !passIcon;
+                            });
+                          },
+                          icon: Icon(passIcon
+                              ? CupertinoIcons.eye_fill
+                              : CupertinoIcons.eye_slash)), section: 'Parol',),
+                  const Gap(30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text("Hali Yangimisiz ?   ",
+                          style: GoogleFonts.nunitoSans(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
+                      const OpenContainerToggling(
+                          text: "Register", to: SignUp())
+                    ],
+                  ),
+                  const Gap(30),
+                  SizedBox(
+                      height: 55,
+                      width: double.infinity,
+                      child: LogRegButton(
+                          text: "Login",
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {}
+                          })),
+                  const Gap(15),
+                  InkWell(
+                    onTap: () => _showPasswordDialog(context),
+                    child: Text("Parol Esingizdan Chiqdimi ?",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.nunitoSans(
+                            color: Colors.indigoAccent,
+                            fontWeight: FontWeight.bold)),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -146,31 +162,41 @@ class _SignUpState extends State<SignIn> with SingleTickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text("Parolni Bilish",
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text("Parolni Bilish",
                           textAlign: TextAlign.start,
                           style: GoogleFonts.nunitoSans(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 25)),
-                    IconButton(onPressed: ()=>navPop(context), icon: const Icon(CupertinoIcons.xmark_circle,size: 30,color: Colors.white,))
-                  ],
-                ),
+                      IconButton(
+                          onPressed: () => navPop(context),
+                          icon: const Icon(
+                            CupertinoIcons.xmark_circle,
+                            size: 30,
+                            color: Colors.white,
+                          ))
+                    ],
+                  ),
                   const Gap(15),
                   SizedBox(
                       width: 400,
                       height: 80,
-                      child: SignTextFieldWidget(
+                      child: SignTextFieldWidget(number: false,
                           hint: "Email",
                           leading: const Icon(Icons.email),
-                          controller: _email)),
-                   SizedBox(
+                          controller: _email, section: 'Email',)),
+                  SizedBox(
                       height: 55,
                       width: 400,
-                      child: LogRegButton(text: "Parolni Jo'nating",onTap: (){},))
+                      child: LogRegButton(
+                        text: "Parolni Jo'nating",
+                        onTap: () =>navPush(context, MainPage()),
+                      ))
                 ],
               ),
             ),

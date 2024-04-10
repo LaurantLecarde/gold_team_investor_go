@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class SignTextFieldWidget extends StatelessWidget {
-  const SignTextFieldWidget(
+class PhoneTextField extends StatelessWidget {
+  const PhoneTextField(
       {super.key,
-      required this.hint,
-      required this.leading,
-      required this.controller,
-      required this.number,
-      required this.section});
+        required this.hint,
+        required this.leading,
+        required this.controller,
+        required this.number,
+        required this.section, required this.maskInputFormatters});
 
   final String hint;
   final Widget leading;
   final TextEditingController controller;
   final bool number;
+  final MaskTextInputFormatter maskInputFormatters;
   final String section;
 
   @override
@@ -33,6 +34,7 @@ class SignTextFieldWidget extends StatelessWidget {
           surfaceTintColor: Colors.lightBlue.shade50,
           clipBehavior: Clip.hardEdge,
           child: TextFormField(
+            inputFormatters: [maskInputFormatters],
             keyboardType: number ? TextInputType.number : TextInputType.text,
             cursorColor: Colors.black,
             controller: controller,

@@ -17,6 +17,7 @@ class LeadingIcon extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
         ),
         child: Image.asset("assets/icons/back.png", fit: BoxFit.cover),
+// child: Icon(back),
       ),
     );
   }

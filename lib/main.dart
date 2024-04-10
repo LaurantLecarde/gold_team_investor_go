@@ -4,7 +4,7 @@ import 'package:gold_team_investor_go/gold_team/presentation/exe.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_in_screens/sign_in.dart';
 
 void main() {
-  runApp(const GoldenInvest());
+  runApp(GoldenInvest());
 }
 
 class GoldenInvest extends StatelessWidget {
@@ -13,8 +13,9 @@ class GoldenInvest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, primaryColor: Color(0xfff4f4f4)),
+      theme: ThemeData(useMaterial3: true, primaryColor: Color(0xffe6e9ef)),
       debugShowCheckedModeBanner: false,
+      home: SignIn(),
       // home: AnimatedSplashScreen(
       //   duration: 1250,
       //   backgroundColor: Colors.black,

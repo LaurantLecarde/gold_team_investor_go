@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/bonus_history.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/orders.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/payment_history.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/payment_screen.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/circle_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GoldenDrawer extends StatelessWidget {
@@ -12,8 +16,6 @@ class GoldenDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Drawer(
       backgroundColor: mainTheme(context),
       child: Column(
@@ -28,8 +30,14 @@ class GoldenDrawer extends StatelessWidget {
                       horizontal: 10.0, vertical: 15),
                   child: Container(
                     decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black26,
+                            spreadRadius: 4,
+                            blurRadius: 4)
+                      ],
                       borderRadius: BorderRadius.circular(12),
-                      color: Colors.grey.shade300,
+                      color: Colors.white,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -67,17 +75,9 @@ class GoldenDrawer extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Text("13 000 000 000 000 so'm",
-                                      overflow: TextOverflow.clip,
-                                      style: GoogleFonts.nunitoSans(fontSize: 12)),
-                                ],
-                              ),
-                            )
+                                height: 50,
+                                width: 100,
+                                child: CircleText(text: "13 793 000 so'm"))
                           ],
                         )
                       ],
@@ -99,10 +99,12 @@ class GoldenDrawer extends StatelessWidget {
                     () => navPush(context, PaymentScreen())),
                 _itemDrawer(
                     "assets/icons/payment.png", "To'lovni Chiqarish", () {}),
-                _itemDrawer("assets/icons/delivery.png", "Buyurtmalar", () {}),
-                _itemDrawer(
-                    "assets/icons/payment_history.png", "To'lov Tarixi", () {}),
-                _itemDrawer("assets/icons/bonus.png", "Bonus Tarixi", () {}),
+                _itemDrawer("assets/icons/delivery.png", "Buyurtmalar",
+                    () => navPush(context, OrdersScreen())),
+                _itemDrawer("assets/icons/payment_history.png", "To'lov Tarixi",
+                    () => navPush(context, PaymentHistory())),
+                _itemDrawer("assets/icons/bonus.png", "Bonus Tarixi",
+                    () => navPush(context, BonusHistory())),
                 _itemDrawer("assets/icons/video.png", "Video Darslar", () {}),
                 const Gap(20),
                 Padding(

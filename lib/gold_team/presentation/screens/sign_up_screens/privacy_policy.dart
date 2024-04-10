@@ -212,10 +212,19 @@ class PrivacyPolicy extends StatelessWidget {
               "9.4. O’zbekiston Republikasi qonunchiligiga ko’ra sotilgan mahsulotlar qaytarib olinmaydi.",
               context),
           const Gap(20),
-          Divider(thickness: 2,color: Colors.grey),const Gap(20),
-          Align(alignment: AlignmentDirectional.bottomEnd,child: SizedBox(
-              width: 150,height: 55,
-              child: LogRegButton(text: "Tanishdim",onTap: ()=>navPop(context),)),), const Gap(30),
+          Divider(thickness: 2, color: Colors.grey),
+          const Gap(20),
+          Align(
+            alignment: AlignmentDirectional.bottomEnd,
+            child: SizedBox(
+                width: 150,
+                height: 55,
+                child: LogRegButton(
+                  text: "Tanishdim",
+                  onTap: () => navPop(context),
+                )),
+          ),
+          const Gap(30),
         ],
       ),
     );
