@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:gold_team_investor_go/gold_team/presentation/exe.dart';
+import 'package:gold_team_investor_go/gold_team/exe_directory/exe.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_in_screens/sign_in.dart';
 
 void main() {

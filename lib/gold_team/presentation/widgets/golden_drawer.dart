@@ -10,6 +10,7 @@ import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_scre
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/payment_screen.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/profile.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/lessons/video_lessons.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/main_page.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/circle_text.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -116,7 +117,7 @@ class GoldenDrawer extends StatelessWidget {
                       () => navPush(context, PaymentHistory())),
                   _itemDrawer("assets/icons/bonus.png", "Bonus Tarixi",
                       () => navPush(context, BonusHistory())),
-                  _itemDrawer("assets/icons/video.png", "Video Darslar", () {}),
+                  _itemDrawer("assets/icons/video.png", "Video Darslar", () =>navPush(context,VideoLesson())),
                   const Gap(20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),

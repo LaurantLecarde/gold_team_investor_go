@@ -41,10 +41,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
   }
 
-  var maskFormatter = new MaskTextInputFormatter(
-      mask: '# ### ### ### ### ###',
-      type: MaskAutoCompletionType.lazy
-  );
+  // var maskFormatter = new MaskTextInputFormatter(
+  //     mask: '# ### ### ### ### ###',
+  //     type: MaskAutoCompletionType.lazy
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -237,7 +237,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 height: 55,
                 width: 200,
                 child: TextField(
-                  inputFormatters: [maskFormatter],
                   style: GoogleFonts.nunitoSans(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
