@@ -1,7 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_team_investor_go/gold_team/exe_directory/exe.dart';
-import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_in_screens/sign_in.dart';
+
+import 'gold_team/presentation/screens/auth_page/sign_in_screens/sign_in.dart';
 
 void main() {
   runApp(GoldenInvest());
@@ -15,17 +16,17 @@ class GoldenInvest extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true, primaryColor: Color(0xffe6e9ef)),
       debugShowCheckedModeBanner: false,
-      home: SignIn(),
-      // home: AnimatedSplashScreen(
-      //   duration: 1250,
-      //   backgroundColor: Colors.black,
-      //   splash: SizedBox(
-      //       height: 80,
-      //       width: 120,
-      //       child: Image.asset("assets/logo/gold_team.png", fit: BoxFit.cover)),
-      //   nextScreen: const SignIn(),
-      //   splashTransition: SplashTransition.fadeTransition,
-      // ),
+      // home: LoginRegisterFlip(),
+      home: AnimatedSplashScreen(
+        duration: 1250,
+        backgroundColor: Colors.black,
+        splash: SizedBox(
+            height: 80,
+            width: 120,
+            child: Image.asset("assets/logo/gold_team.png", fit: BoxFit.cover)),
+        nextScreen: LoginRegisterFlip(),
+        splashTransition: SplashTransition.fadeTransition,
+      ),
     );
   }
 }

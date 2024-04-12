@@ -63,7 +63,7 @@ class PasswordTextFieldWidget extends StatelessWidget {
                 if (value!.isEmpty) {
                   return "Iltimos $section Qismini To'ldiring";
                 }
-                return null;
+
               },
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
@@ -49,7 +50,6 @@ class _DetailedLessonState extends State<DetailedLesson> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,17 @@ class _DetailedLessonState extends State<DetailedLesson> {
                 ),
               ),
             ),
-ElevatedButton(onPressed: ()=>navPush(context, FUllScreen(link: widget.lessonModel.lessonsLinks![0])), child: Text("FUllScreen")),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("To'liq Oynada Ko'rish Uchun Bosing ==>",style: GoogleFonts.nunitoSans(fontWeight: FontWeight.bold),),
+                IconButton(
+                    onPressed: () => navPush(context,
+                        FUllScreen(link: widget.lessonModel.lessonsLinks![0])),
+                    icon: Icon(Icons.fullscreen)),
+              ],
+            ),
             const Gap(30),
             Divider(
               color: Colors.grey,
@@ -115,7 +125,8 @@ ElevatedButton(onPressed: ()=>navPush(context, FUllScreen(link: widget.lessonMod
 
             final bool isPlaying = index == currentVideoIndex;
             return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 5),
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -139,10 +150,10 @@ ElevatedButton(onPressed: ()=>navPush(context, FUllScreen(link: widget.lessonMod
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Gap(10),
-                      Icon(Icons.play_circle_outlined,
-                          color:
-                              isPlaying ? Colors.white : Colors.grey.shade800,
-                          size: isPlaying ? 28: 20,
+                      Icon(
+                        Icons.play_circle_outlined,
+                        color: isPlaying ? Colors.white : Colors.grey.shade800,
+                        size: isPlaying ? 28 : 20,
                       ),
                       const Gap(20),
                       Text(
@@ -162,26 +173,22 @@ ElevatedButton(onPressed: ()=>navPush(context, FUllScreen(link: widget.lessonMod
 }
 
 class FUllScreen extends StatefulWidget {
-  const FUllScreen({super.key,required this.link});
+  const FUllScreen({super.key, required this.link});
 
- final String link;
+  final String link;
 
   @override
   State<FUllScreen> createState() => _FUllScreenState();
 }
 
 class _FUllScreenState extends State<FUllScreen> {
-
-
-
   late YoutubePlayerController _controller;
+
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(
-          widget.link) ??
-          "",
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.link) ?? "",
       flags: YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
@@ -194,23 +201,24 @@ class _FUllScreenState extends State<FUllScreen> {
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
         width: double.infinity,
-        height:double.infinity,child:YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.blueAccent,
-        progressColors: ProgressBarColors(
-          playedColor: Colors.blue,
-          handleColor: Colors.blueAccent,
+        height: double.infinity,
+        child: YoutubePlayer(
+          controller: _controller,
+          showVideoProgressIndicator: true,
+          progressIndicatorColor: Colors.blueAccent,
+          progressColors: ProgressBarColors(
+            playedColor: Colors.blue,
+            handleColor: Colors.blueAccent,
+          ),
         ),
-      ) ,
       ),
     );
   }
 }
-

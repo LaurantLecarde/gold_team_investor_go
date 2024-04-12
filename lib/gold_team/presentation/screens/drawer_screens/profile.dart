@@ -2,15 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
-import 'package:gold_team_investor_go/gold_team/presentation/screens/sign_in_screens/sign_in.dart';
+import 'package:gold_team_investor_go/gold_team/exe_directory/exe.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../auth_page/sign_in_screens/sign_in.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -187,7 +188,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12))),
-        onPressed: () =>navPushAndRemove(context, SignIn()),
+        onPressed: () =>navPushAndRemove(context, LoginRegisterFlip()),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
