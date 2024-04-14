@@ -194,7 +194,7 @@ class _SignInState extends State<SignIn> {
   void _validateLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       if (_username.text == _userName && _password.text == _passWord) {
-        navPushAndRemove(context, MainPage());
+        navPushAndRemoveSmallToFull(context, MainPage());
         showMineSnackBar("Muvaffaqiyatli Login", Colors.green, context);
       } else {
         showMineSnackBar(
@@ -260,7 +260,7 @@ class _SignInState extends State<SignIn> {
                   height: 55,
                   width: 400,
                   child: LogRegButton(
-                    onTap: () => navPush(context, MainPage()),
+                    onTap: () => navPushAndRemoveSmallToFull(context, MainPage()),
                     text:"Parolni Jo'nating",
                   ),
                 ),

@@ -297,7 +297,7 @@ class _SignUpState extends State<SignUp> {
       } else {
         showMineSnackBar(
             "Muvaffaqiyatli Registratsiya Qilindi", Colors.green, context);
-        navPushAndRemove(context, MainPage());
+        navPushAndRemoveSmallToFull(context, MainPage());
       }
     }
   }

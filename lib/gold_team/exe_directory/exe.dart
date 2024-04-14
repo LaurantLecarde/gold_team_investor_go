@@ -1,42 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flip_card/flip_card.dart';
-import '../presentation/screens/auth_page/sign_in_screens/sign_in.dart';
-import '../presentation/screens/auth_page/sign_up_screens/sign_up_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../model/conntectivity_class.dart';
 
-class MyApp extends StatelessWidget {
+class InternetHaveNot extends StatefulWidget {
+  const InternetHaveNot({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Login/Register Flip Animation',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginRegisterFlip(),
-    );
-  }
+  State<InternetHaveNot> createState() => _InternetHaveNotState();
 }
 
-class LoginRegisterFlip extends StatefulWidget {
-  @override
-  _LoginRegisterFlipState createState() => _LoginRegisterFlipState();
-}
-
-class _LoginRegisterFlipState extends State<LoginRegisterFlip> {
-  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
-
+class _InternetHaveNotState extends State<InternetHaveNot> {
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
+
     return Scaffold(
       body: Center(
-        child: FlipCard(
-          key: cardKey,
-          flipOnTouch: false,
-          front: SignIn(onFlip: () => cardKey.currentState?.toggleCard()),
-          back: SignUp(onFlip: () => cardKey.currentState?.toggleCard()),
+        child: Text(
+          connectivityService.isConnected
+              ? 'Connected to Internet'
+              : 'No Internet Connection',
         ),
       ),
     );
   }
 }
-

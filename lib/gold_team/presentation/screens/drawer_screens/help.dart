@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/circle_text.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,40 +66,46 @@ class _HelpScreenState extends State<HelpScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Container(
+        // padding: EdgeInsets.symmetric(vertical: 22),
         width: double.infinity,
         height: 70,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(color: Colors.black26, spreadRadius: 5, blurRadius: 5)
         ], borderRadius: BorderRadius.circular(12), color: Colors.white),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12))),
-          onPressed: onPressed,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 180,
-                child: Text(text,
-                   textAlign: TextAlign.center,
-                    style: GoogleFonts.nunitoSans(
-                        color: Colors.indigoAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15)),
-              ),
-              SizedBox(
-                  height: 35,
-                  width: 35,
-                  child: Image.asset(
-                    image,
-                    fit: BoxFit.cover,
-                    color: wantColor ? color : null,
-                  )),
-            ],
+        child: Center(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12))),
+            onPressed: onPressed,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SizedBox(
+                    width: 180,
+                    child: CircleText(
+                      text: text,
+                      width: 150,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.indigoAccent,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                    height: 35,
+                    width: 35,
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.cover,
+                      color: wantColor ? color : null,
+                    )),
+              ],
+            ),
           ),
         ),
       ),

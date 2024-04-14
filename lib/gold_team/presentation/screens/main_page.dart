@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
+import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
+import 'package:provider/provider.dart';
+import '../../model/conntectivity_class.dart';
 import '../widgets/golden_drawer.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,6 +18,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return Scaffold(
       backgroundColor: mainTheme(context),
       appBar: GradientAppBarMain(
@@ -43,9 +49,15 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       drawer: GoldenDrawer(),
-      body: Center(
-        child: Text(""),
-      ),
+      body: connectivityService.isConnected
+          ? Center(
+              child: ElevatedButton(
+                onPressed: () => navPush(context, NoInternet()),
+                child: Text("NOInternet"),
+              ),
+            )
+          : NoInternet(),
     );
+    // : NoInternet();
   }
 }

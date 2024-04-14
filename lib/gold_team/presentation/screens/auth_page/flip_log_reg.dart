@@ -15,7 +15,6 @@ class _LoginRegisterFlipState extends State<LoginRegisterFlip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Center(
         child: FlipCard(
           key: cardKey,
