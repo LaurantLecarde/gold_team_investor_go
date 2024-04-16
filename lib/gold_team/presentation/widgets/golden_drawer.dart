@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/bonus_history.dart';
@@ -53,47 +54,76 @@ class GoldenDrawer extends StatelessWidget {
                             child: Image.asset("assets/icons/profile_drawer.png"),
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Sardorbek",
-                              style: GoogleFonts.nunitoSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                        SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Sardorbek",
+                                style: GoogleFonts.nunitoSans(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            const Gap(10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: Image.asset(
-                                    "assets/icons/money.png",
-                                    fit: BoxFit.cover,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: Image.asset(
+                                      "assets/icons/money.png",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "Shaxsiy Hisob",
-                                  style: GoogleFonts.nunitoSans(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: CircleText(
-                                text: "13 793 000 so'm",
-                                width: 100,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black,
+                                  Text(
+                                    "Shaxsiy Hisob",
+                                    style: GoogleFonts.nunitoSans(fontSize: 12),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: 50,
+                                width: 100,
+                                child: CircleText(
+                                  text: "13 793 000 so'm",
+                                  width: 100,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: Image.asset(
+                                      "assets/icons/money.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Bonus Hisob",
+                                    style: GoogleFonts.nunitoSans(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 50,
+                                width: 100,
+                                child: CircleText(
+                                  text: "500 000 so'm",
+                                  width: 100,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -108,7 +138,7 @@ class GoldenDrawer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Gap(20),
-                  _itemDrawer("assets/icons/main.png", "Asosiy", () => navPushAndRemove(context, MainPage())),
+                  _itemDrawer("assets/icons/main.png", "Asosiy", () => navPush(context, MainPage())),
                   _itemDrawer("assets/icons/profile.png", "Profile", () => navPush(context, ProfileScreen())),
                   _itemDrawer("assets/icons/full_balance.png", "Hisobni To'ldirish", () => navPush(context, PaymentScreen())),
                   _itemDrawer("assets/icons/payment.png", "To'lovni Chiqarish", () {}),

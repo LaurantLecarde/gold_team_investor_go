@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 
 navPush(context, Widget to) {
   Navigator.of(context).push(CupertinoPageRoute(builder: (context) => to));
@@ -27,4 +29,11 @@ navPushAndRemoveSmallToFull(context, Widget to) {
         transitionDuration: Duration(seconds: 1),
       ),
       (route) => false);
+}
+
+navPopsIfNoInternet(context, bool connected) {
+  connected
+      ? Navigator.of(context).pop()
+      : Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => NoInternet()));
 }

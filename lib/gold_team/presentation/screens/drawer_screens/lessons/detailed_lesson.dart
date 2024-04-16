@@ -5,9 +5,13 @@ import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:gold_team_investor_go/gold_team/exe_directory/exe_model.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import '../../../../model/conntectivity_class.dart';
 
 class DetailedLesson extends StatefulWidget {
   const DetailedLesson({super.key, required this.lessonModel});
@@ -52,12 +56,15 @@ class _DetailedLessonState extends State<DetailedLesson> {
 
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return Scaffold(
       appBar: AppBarApp(
         title: "${widget.lessonModel.title}",
       ),
       backgroundColor: mainTheme(context),
-      body: _singleLesson(),
+      // body: connectivityService.isConnected ? _singleLesson() : NoInternet(),
+    body: _singleLesson(),
     );
   }
 
@@ -94,7 +101,10 @@ class _DetailedLessonState extends State<DetailedLesson> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("To'liq Oynada Ko'rish Uchun Bosing ==>",style: GoogleFonts.nunitoSans(fontWeight: FontWeight.bold),),
+                Text(
+                  "To'liq Oynada Ko'rish Uchun Bosing ==>",
+                  style: GoogleFonts.nunitoSans(fontWeight: FontWeight.bold),
+                ),
                 IconButton(
                     onPressed: () => navPush(context,
                         FUllScreen(link: widget.lessonModel.lessonsLinks![0])),

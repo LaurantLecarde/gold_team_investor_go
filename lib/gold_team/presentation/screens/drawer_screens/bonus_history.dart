@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/sizes_app.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants/text_styles.dart';
+import '../../../model/conntectivity_class.dart';
 
 class BonusHistory extends StatefulWidget {
   const BonusHistory({super.key});
@@ -26,84 +29,98 @@ class _OrdersScreenState extends State<BonusHistory> {
     {'date': '09.02.2024', 'desc': 'admin_8', 'amount': '100000'},
   ];
 
-
-
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return Scaffold(
       backgroundColor: mainTheme(context),
       appBar: AppBarApp(title: "BONUS TARIXI"),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: myDecoration,
-              child: DataTable(
-                columns: [
-                  DataColumn(
-                      label: Text(
-                        'Sana',
-                        style: titleStyle,
-                      )),
-                  DataColumn(
-                      label: Text(
-                        'Izoh',
-                        style: titleStyle,
-                      )),
-                  DataColumn(
-                      label: Text(
-                        'Miqdor',
-                        style: titleStyle,
-                      )),
-                ],
-                rows: List.generate(
-                  data.length,
-                      (index) => DataRow(
-                    cells: [
-                      DataCell(Row(
-                        children: [
-                          Text(
-                            "${index + 1})  ",
-                            style: titleStyleSub,
-                          ),
-                          Text(
-                            "${data[index]['date']!} ",
-                            style: titleStyleSub,
-                          ),
-                        ],
-                      )),
-                      DataCell(Text(
-                        "${data[index]['desc']!}  - Klon Xarid Qildi",
-                        style: subTitleStyle,
-                      )),
-                      DataCell(Text(
-                        "${data[index]['amount']!} So'm",
-                        style: subTitleStyle,
-                      )),
-                    ],
-                  ),
+      // body: connectivityService.isConnected ? _bonusHistory() : NoInternet(),
+     body: _bonusHistory(),
+
+      bottomNavigationBar: _bottomNav(),
+    );
+  }
+
+  _bottomNav() {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Container(
+        height: 60,
+        width: double.infinity,
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(color: Colors.black12, spreadRadius: 5, blurRadius: 5)
+        ], gradient: myGradientC(), borderRadius: BorderRadius.circular(15)),
+        child: Center(
+            child: Text(
+          connectivityService.isConnected
+              ? "Jami : ${calculateTotalAmount(data)} So'm"
+              : "Internet Mavjud Emas",
+          style: titleStyleBot,
+        )),
+      ),
+    );
+  }
+
+  _bonusHistory() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Container(
+            padding: EdgeInsets.all(8),
+            decoration: myDecoration,
+            child: DataTable(
+              columns: [
+                DataColumn(
+                    label: Text(
+                  'Sana',
+                  style: titleStyle,
+                )),
+                DataColumn(
+                    label: Text(
+                  'Izoh',
+                  style: titleStyle,
+                )),
+                DataColumn(
+                    label: Text(
+                  'Miqdor',
+                  style: titleStyle,
+                )),
+              ],
+              rows: List.generate(
+                data.length,
+                (index) => DataRow(
+                  cells: [
+                    DataCell(Row(
+                      children: [
+                        Text(
+                          "${index + 1})  ",
+                          style: titleStyleSub,
+                        ),
+                        Text(
+                          "${data[index]['date']!} ",
+                          style: titleStyleSub,
+                        ),
+                      ],
+                    )),
+                    DataCell(Text(
+                      "${data[index]['desc']!}  - Klon Xarid Qildi",
+                      style: subTitleStyle,
+                    )),
+                    DataCell(Text(
+                      "${data[index]['amount']!} So'm",
+                      style: subTitleStyle,
+                    )),
+                  ],
                 ),
               ),
             ),
           ),
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Container(
-          height: 60,
-          width: double.infinity,
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(color: Colors.black12, spreadRadius: 5, blurRadius: 5)
-          ], gradient: myGradientC(), borderRadius: BorderRadius.circular(15)),
-          child: Center(
-              child: Text(
-                "Jami : ${calculateTotalAmount(data)} So'm",
-                style: titleStyleBot,
-              )),
         ),
       ),
     );

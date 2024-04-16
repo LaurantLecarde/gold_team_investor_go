@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/lessons/levels_screens/a_level_one.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/lessons/levels_screens/b_level_two.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/lessons/levels_screens/c_level_three.dart';
@@ -9,8 +10,10 @@ import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_scre
 import 'package:gold_team_investor_go/gold_team/presentation/screens/drawer_screens/lessons/levels_screens/g_level_seven.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../constants/colors.dart';
+import '../../../../model/conntectivity_class.dart';
 
 class VideoLesson extends StatefulWidget {
   const VideoLesson({super.key});
@@ -22,15 +25,19 @@ class VideoLesson extends StatefulWidget {
 class _VideoLessonState extends State<VideoLesson> {
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return DefaultTabController(
       length: 7,
       child: Scaffold(
         appBar: AppBarApp(title: "VIDEO DARSLAR"),
+        // body: connectivityService.isConnected ? _lessonSection() : NoInternet(),
         body: _lessonSection(),
       ),
     );
   }
-  _lessonSection(){
+
+  _lessonSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: Column(
@@ -39,18 +46,17 @@ class _VideoLessonState extends State<VideoLesson> {
         children: [
           const Gap(5),
           Container(
-            height: 70,width: double.infinity,
+            height: 70,
+            width: double.infinity,
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
                   color: Colors.lightBlue.shade50,
-                  borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.circular(10)),
               labelStyle: GoogleFonts.nunitoSans(
                   color: Colors.indigoAccent,
-                  fontWeight:FontWeight.bold,
-                  fontSize:15
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
               isScrollable: true,
               tabs: [
                 Tab(text: '1-Bosqich'),
@@ -63,17 +69,19 @@ class _VideoLessonState extends State<VideoLesson> {
               ],
             ),
           ),
-          Expanded(child: TabBarView(
-            children: [
-              OneLevel(),
-              TwoLevel(),
-              ThreeLevel(),
-              FourLevel(),
-              FiveLevel(),
-              SixLevel(),
-              SevenLevel()
-            ],
-          ),)
+          Expanded(
+            child: TabBarView(
+              children: [
+                OneLevel(),
+                TwoLevel(),
+                ThreeLevel(),
+                FourLevel(),
+                FiveLevel(),
+                SixLevel(),
+                SevenLevel()
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/circle_text.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../constants/navigators.dart';
+import '../../../model/conntectivity_class.dart';
 import '../auth_page/sign_up_screens/about_company.dart';
 import '../auth_page/sign_up_screens/privacy_policy.dart';
 
@@ -19,12 +22,20 @@ class HelpScreen extends StatefulWidget {
 }
 
 class _HelpScreenState extends State<HelpScreen> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
+
     return Scaffold(
       appBar: AppBarApp(title: "YORDAM"),
       backgroundColor: mainTheme(context),
-      body: _helpSection(),
+      // body: connectivityService.isConnected ? _helpSection() : NoInternet(),
+   body: _helpSection(),
+
     );
   }
 

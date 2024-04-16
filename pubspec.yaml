@@ -54,6 +54,7 @@ dependencies:
   flip_card: ^0.7.0
   connectivity: ^3.0.6
   provider: ^6.1.2
+  showcaseview: ^2.0.3
 
 dev_dependencies:
   flutter_test:

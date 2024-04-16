@@ -6,11 +6,14 @@ import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:gold_team_investor_go/gold_team/constants/sizes_app.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
 
+import '../../../model/conntectivity_class.dart';
 import '../auth_page/flip_log_reg.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -32,10 +35,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       TextEditingController(text: "Qayta");
   final TextEditingController _cPasswordController =
       TextEditingController(text: "Qayta");
-  final TextEditingController _districtController =
-      TextEditingController(text: "Andijon Viloyati");
   final TextEditingController _financeController =
       TextEditingController(text: "Finance Parol");
+  final TextEditingController _name = TextEditingController(text: "Sardorbek");
+  final TextEditingController _surname = TextEditingController(text: "Saidov");
+  final TextEditingController _fatherName =
+      TextEditingController(text: "Karimjon O'g'li");
 
   var mask = MaskTextInputFormatter(mask: "(##) ### ## ##");
 
@@ -58,29 +63,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return Scaffold(
       extendBody: true,
       backgroundColor: mainTheme(context),
       appBar: AppBarApp(title: "MENING PROFILIM"),
+      // body: connectivityService.isConnected ? _profileSection() : NoInternet(),
       body: _profileSection(),
-      bottomNavigationBar: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-            child: Container(
-              height: 70,
-              padding: EdgeInsets.all(5),
+      bottomNavigationBar: _bottom(),
+    );
+  }
+
+  _bottom() {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+          child: Container(
+            height: 70,
+            padding: EdgeInsets.all(5),
+            width: double.infinity,
+            color: Colors.transparent,
+            child: SizedBox(
+              height: 55,
               width: double.infinity,
-              color: Colors.transparent,
-              child: SizedBox(
-                height: 55,
-                width: double.infinity,
-                child: LogRegButton(
-                  onTap: () {},
-                  text: "SAQLASH",
-                ),
-              ),
+              child: connectivityService.isConnected
+                  ? LogRegButton(
+                      onTap: () {},
+                      text: "SAQLASH",
+                    )
+                  : Center(
+                      child: Text("Internet Mavjud Emas",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunitoSans(
+                              fontWeight: FontWeight.bold, fontSize: 18)),
+                    ),
             ),
           ),
         ),
@@ -155,9 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  final List<String> items = ['One', 'Two', 'Three', 'Four'];
-  String dropdownValue = 'One';
-
   Widget _infoSection() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -198,6 +216,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           false,
           obscure: _obscurePassword,
         ),
+        _infoTextField(Colors.white, _name, "Ism", Icon(CupertinoIcons.person),
+            16, Colors.black, false),
+        _infoTextField(Colors.white, _surname, "Familiya",
+            Icon(CupertinoIcons.person), 16, Colors.black, false),
+        _infoTextField(Colors.white, _fatherName, "Sharf",
+            Icon(CupertinoIcons.person), 16, Colors.black, false),
         _phoneTextField(),
         _districtSection(),
         _infoTextField(Colors.white, _financeController, "Finans Parol",

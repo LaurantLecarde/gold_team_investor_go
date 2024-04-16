@@ -86,7 +86,7 @@ class LessonBuilder extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
                                 backgroundColor: Colors.lightBlue.shade50),
-                            onPressed: () {},
+                            onPressed: () =>navPush(context,DetailedLesson(lessonModel: lesson)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,

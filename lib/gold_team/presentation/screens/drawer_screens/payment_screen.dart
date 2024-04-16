@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:gold_team_investor_go/gold_team/constants/colors.dart';
 import 'package:gold_team_investor_go/gold_team/constants/navigators.dart';
 import 'package:gold_team_investor_go/gold_team/constants/sizes_app.dart';
+import 'package:gold_team_investor_go/gold_team/presentation/screens/add_screens/no_internet.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/app_bar_app.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/glow_button_toggle.dart';
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/leading_icon.dart';
@@ -11,6 +12,9 @@ import 'package:gold_team_investor_go/gold_team/presentation/widgets/sign_passwo
 import 'package:gold_team_investor_go/gold_team/presentation/widgets/workers/loading_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:provider/provider.dart';
+
+import '../../../model/conntectivity_class.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -41,19 +45,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.initState();
   }
 
-  // var maskFormatter = new MaskTextInputFormatter(
-  //     mask: '# ### ### ### ### ###',
-  //     type: MaskAutoCompletionType.lazy
-  // );
-
   @override
   Widget build(BuildContext context) {
+    var connectivityService = Provider.of<ConnectivityService>(context);
+
     return Scaffold(
       backgroundColor: mainTheme(context),
       appBar: AppBarApp(
         title: 'HISOBNI TO`LDIRISH',
       ),
-      body: _paymentSection(),
+      // body: connectivityService.isConnected ? _paymentSection() : NoInternet(),
+    body: _paymentSection(),
     );
   }
 
@@ -269,4 +271,3 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 }
-

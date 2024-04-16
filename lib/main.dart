@@ -13,6 +13,10 @@ void main() {
   runApp(GoldenInvest());
 }
 
+// void main(){
+//   runApp(MyApp());
+// }
+
 class GoldenInvest extends StatelessWidget {
   GoldenInvest({super.key});
 
